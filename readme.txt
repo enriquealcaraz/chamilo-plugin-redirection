@@ -1,1 +1,0 @@
-Este plugin crea redirecciones personalizadas por usuario.
