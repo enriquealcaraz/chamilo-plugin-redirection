@@ -3,9 +3,8 @@
  * @package chamilo.plugin.redireccion
  */
 
-require_once __DIR__.'/lib/redireccion.class.php';
+require_once __DIR__.'/config.php';
 $redirecciones = Redireccion::get();
-
 
 echo "<div class='table-responsive'>";
 echo "<table class='table table-bordered table-condensed'>";
@@ -25,8 +24,4 @@ echo "<table class='table table-bordered table-condensed'>";
     }
 
 echo "</table>";
-
-
-
-
 echo "</div>";
