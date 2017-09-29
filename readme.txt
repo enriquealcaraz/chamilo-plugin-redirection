@@ -1,2 +1,3 @@
-<H1>CHAMILO-PLUGIN-REDIRECTION</H1>
+CHAMILO-PLUGIN-REDIRECTION
+
 Plugin chamilo para la redirección de usuarios.
