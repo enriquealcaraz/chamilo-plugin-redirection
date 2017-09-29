@@ -1,26 +1,55 @@
 <?php
+/* For licensing terms, see /license.txt */
 /**
- * @package chamilo.plugin.redireccion
+ * Config the plugin
+ * @author Enrique Alcaraz Lopez 
+ * @package chamilo.plugin.redirection
  */
+
 require_once __DIR__.'/config.php';
-$redirecciones = Redireccion::get();
+$redirecciones = Redirection::get();
 
-echo "<div class='table-responsive'>";
-echo "<table class='table table-bordered table-condensed'>";
+if (isset($_REQUEST["id"])) {
+    Redirection::delete($_REQUEST["id"]);
+    header ("Location: index.php");
+}
+else if (isset($_POST["submit_button"])) {    
+    Redirection::insert($_POST["user_id"], $_POST["url"]);
+    header ("Location: index.php");
+}
 
-    echo "<tr>";
-    echo "<th>Usuario</th>";
-    echo "<th>Url</th>";
-    echo "<th></th>";
-    echo "</tr>";
+
+?>
+
+<form action="./index.php" method="post">
+<div class="table-responsive well"> 
+    <table class="table table-condensed">            
+        <thead>
+            <td><input type="text" class="form-control" placeholder="User_id" name="user_id" /></td>
+            <td><input type="text" class="form-control" placeholder="url" name="url" /></td>
+            <td><input type='submit' value='Agregar' name="submit_button" class='btn btn-primary' /></td>
+        </thead>        
+    </table>
     
-    foreach($redirecciones as $redi) {
-        echo "<tr>";
-        echo "<td>".$redi["user_id"]."</td>";
-        echo "<td>".$redi["url"]."</td>";
-        echo "<td><a href='#'>Borrar</a></td>";
-        echo "</tr>";
-    }
+</div>
+</form>
 
-echo "</table>";
-echo "</div>";
+
+<div class="table-responsive"> 
+    <table class="table table-bordered table-condensed">            
+        <tr>
+            <th>Usuario</th>
+            <th>Url</th>
+            <th></th>
+        </tr>            
+        <?php
+        foreach ($redirecciones as $redi) {
+            echo '<tr>';
+            echo '<td>' . $redi["user_id"] . '</td>';
+            echo '<td>' . $redi["url"] . '</td>';
+            echo '<td><a href="index.php?id=' . $redi["id"] . '">Borrar</a></td>';
+            echo '</tr>';
+        }
+        ?>
+    </table>
+</div>
