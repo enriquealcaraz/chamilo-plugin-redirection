@@ -2,7 +2,6 @@
 /**
  * @package chamilo.plugin.redireccion
  */
-
 require_once __DIR__.'/config.php';
 $redirecciones = Redireccion::get();
 
