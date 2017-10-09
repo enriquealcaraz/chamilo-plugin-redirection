@@ -1,12 +1,16 @@
 <?php
 /* For licensing terms, see /license.txt */
+
 /**
  * Config the plugin
  * @author Enrique Alcaraz Lopez
  * @package chamilo.plugin.redirection
  */
-require_once __DIR__ . '/config.php';
+
+require_once __DIR__.'/config.php';
+
 api_protect_admin_script();
+
 $list = RedirectionPlugin::getAll();
 
 if (isset($_REQUEST['id'])) {
@@ -26,6 +30,7 @@ if (isset($_REQUEST['id'])) {
 }
 
 Display::display_header();
+
 ?>
 <form action="./index.php" method="post">
     <div class="table-responsive well">
@@ -52,16 +57,17 @@ Display::display_header();
             $userInfo = api_get_user_info($item['user_id']);
             $userName = get_lang('Unknown');
             if (!empty($userInfo)) {
-                $userName = $userInfo['complete_name_with_username'] . ' - ' . $item['user_id'];
+                $userName = $userInfo['complete_name_with_username'].' - '.$item['user_id'];
             }
             echo '<tr>';
-            echo '<td>' . $userName . '</td>';
-            echo '<td>' . $item['url'] . '</td>';
-            echo '<td><a class="btn btn-danger" href="index.php?id=' . $item['id'] . '">Delete</a></td>';
+            echo '<td>'.$userName.'</td>';
+            echo '<td>'.$item['url'].'</td>';
+            echo '<td><a class="btn btn-danger" href="index.php?id='.$item['id'].'">Delete</a></td>';
             echo '</tr>';
         }
         ?>
     </table>
 </div>
 <?php
+
 Display::display_footer();

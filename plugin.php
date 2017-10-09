@@ -1,5 +1,6 @@
 <?php
 /* For licensing terms, see /license.txt */
+
 /**
  * Plugin
  * @author Enrique Alcaraz Lopez
