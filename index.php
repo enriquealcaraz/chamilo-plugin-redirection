@@ -1,21 +1,22 @@
 <?php
 /* For licensing terms, see /license.txt */
 /**
- * Config the plugin
- * @author Enrique Alcaraz Lopez 
- * @package chamilo.plugin.redirection
- */
+* Config the plugin
+* @author Enrique Alcaraz Lopez
+* @package chamilo.plugin.redirection
+*/
 
 require_once __DIR__.'/config.php';
-$redirecciones = Redirection::get();
+$redirecciones = PluginRedirection::get();
 
 if (isset($_REQUEST["id"])) {
-    Redirection::delete($_REQUEST["id"]);
-    header ("Location: index.php");
-}
-else if (isset($_POST["submit_button"])) {    
-    Redirection::insert($_POST["user_id"], $_POST["url"]);
-    header ("Location: index.php");
+    PluginRedirection::delete($_REQUEST["id"]);
+    header("Location: index.php");
+    exit();    
+} elseif (isset($_POST["submit_button"])) {    
+    PluginRedirection::insert($_POST["user_id"], $_POST["url"]);
+    header("Location: index.php");
+    exit();
 }
 
 
