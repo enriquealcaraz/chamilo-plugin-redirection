@@ -1,4 +1,4 @@
-<<?php
+<?php
 /* For licensing terms, see /license.txt */
 /**
  * Config the plugin
