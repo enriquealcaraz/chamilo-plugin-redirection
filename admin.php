@@ -5,10 +5,13 @@
  * @author Enrique Alcaraz Lopez
  * @package chamilo.plugin.redirection
  */
+
 require_once __DIR__.'/config.php';
 api_protect_admin_script();
+
 $list = RedirectionPlugin::getAll();
 $url = api_get_path(WEB_PLUGIN_PATH).'redirection/admin.php';
+
 if (isset($_REQUEST['id'])) {
     RedirectionPlugin::delete($_REQUEST['id']);
     Display::addFlash(Display::return_message(get_lang('Deleted')));
@@ -24,6 +27,7 @@ if (isset($_REQUEST['id'])) {
     header('Location: '.$url);
     exit;
 }
+
 $content = '
 <form action="'.$url.'" method="post">
     <div class="table-responsive well">
@@ -44,6 +48,7 @@ $content = '
             <th></th>
         </tr>        
 ';
+
 foreach ($list as $item) {
     $userInfo = api_get_user_info($item['user_id']);
     $userName = get_lang('Unknown');
