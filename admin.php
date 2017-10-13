@@ -61,9 +61,11 @@ foreach ($list as $item) {
     $content.= '<td><a class="btn btn-danger" href="'.$url.'?id='.$item['id'].'">Delete</a></td>';
     $content.= '</tr>';
 }
+
 $content.= '
 </table>
 </div>';
+
 $tpl = new Template(
     '',
     true,
@@ -72,5 +74,6 @@ $tpl = new Template(
     false,
     false
 );
+
 $tpl->assign('content', $content);
 $tpl->display_one_col_template();
