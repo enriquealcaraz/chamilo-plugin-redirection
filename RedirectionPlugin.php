@@ -5,9 +5,11 @@
  * @author Enrique Alcaraz Lopez
  * @package chamilo.plugin.redirection
  */
+
 class RedirectionPlugin extends Plugin
 {
     public $isAdminPlugin = true;
+    
     /**
      * Class constructor
      */
@@ -18,6 +20,7 @@ class RedirectionPlugin extends Plugin
         parent::__construct($version, $author, ['enabled' => 'boolean']);
         $this->isAdminPlugin = true;
     }
+    
     /**
      * @return RedirectionPlugin
      */
@@ -26,6 +29,7 @@ class RedirectionPlugin extends Plugin
         static $result = null;
         return $result ? $result : $result = new self();
     }
+    
     /**
      * @param int $userId
      * @param string $url
@@ -37,12 +41,15 @@ class RedirectionPlugin extends Plugin
         if (empty($userId)) {
             return false;
         }
+        
         $sql = "DELETE FROM plugin_redirection WHERE user_id = $userId";
         Database::query($sql);
         $userInfo = api_get_user_info($userId);
+        
         if (empty($userInfo)) {
             return false;
         }
+        
         return Database::insert(
             'plugin_redirection',
             [
@@ -51,6 +58,7 @@ class RedirectionPlugin extends Plugin
             ]
         );
     }
+    
     /**
      * @param $userId
      * @return array
@@ -60,13 +68,17 @@ class RedirectionPlugin extends Plugin
     {
         $userId = (int) $userId;
         $userInfo = api_get_user_info($userId);
+        
         if (empty($userInfo)) {
             return false;
         }
+        
         $sql = "SELECT * FROM plugin_redirection WHERE user_id = $userId LIMIT 1";
         $result = Database::query($sql);
+        
         return Database::fetch_array($result, 'ASSOC');
     }
+    
     /**
      * @param int $id
      */
@@ -78,14 +90,17 @@ class RedirectionPlugin extends Plugin
             array('id = ?' => array($id))
         );
     }
+    
     /**
      * @return array
      */
     public static function getAll()
     {
         $table = Database::get_main_table('plugin_redirection');
+        
         return Database::select('*', $table);
     }
+    
     public static function install()
     {
         $table = Database::get_main_table('plugin_redirection');
@@ -94,12 +109,15 @@ class RedirectionPlugin extends Plugin
             user_id INT unsigned NOT NULL DEFAULT 0,
             url VARCHAR(255) NOT NULL DEFAULT ''
         )";
+        
         Database::query($sql);
     }
+    
     public static function uninstall()
     {
         $table = Database::get_main_table('plugin_redirection');
         $sql = "DROP TABLE $table";
+        
         Database::query($sql);
     }
 }
